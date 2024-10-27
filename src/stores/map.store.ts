@@ -19,7 +19,10 @@ export const useMapStore = defineStore('map', () => {
       <p>In this part of the world</p>
     `);
 
-    new Marker().setLngLat(map.getCenter()).setPopup(currentLocationPopup).addTo(map);
+    new Marker({ color: '#4a00ff' })
+      .setLngLat(map.getCenter())
+      .setPopup(currentLocationPopup)
+      .addTo(map);
 
     _map.value = map;
   };
@@ -36,7 +39,7 @@ export const useMapStore = defineStore('map', () => {
         <p>${place.properties.full_address}</p>
       `);
 
-      const newMarker = new Marker()
+      const newMarker = new Marker({ color: '#4a00ff' })
         .setPopup(popup)
         .setLngLat(place.geometry.coordinates)
         .addTo(_map.value);
@@ -107,7 +110,7 @@ export const useMapStore = defineStore('map', () => {
       type: 'line',
       source: 'route',
       layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': '#3887be', 'line-width': 5 },
+      paint: { 'line-color': '#4a00ff', 'line-width': 5 },
     });
   };
 
