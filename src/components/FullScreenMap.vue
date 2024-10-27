@@ -11,7 +11,7 @@ const placesStore = usePlacesStore();
 const mapDiv = ref<HTMLDivElement>();
 
 watch(mapDiv, () => {
-  if (mapDiv.value && !placesStore.isLoading && placesStore.isUserLocationReady) {
+  if (mapDiv.value && !placesStore.isLoading && !!placesStore.userLocation) {
     const map = new Map({
       container: mapDiv.value,
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -27,7 +27,7 @@ watch(mapDiv, () => {
 <template>
   <section class="w-screen h-screen">
     <div v-if="placesStore.isLoading" class="h-full flex justify-center">
-      <span class="loading loading-ring loading-lg" aria-label="Loading map"></span>
+      <span class="loading loading-ring loading-lg text-primary" aria-label="Loading map"></span>
     </div>
 
     <div v-else-if="!placesStore.userLocation" class="w-full h-full flex items-center">
