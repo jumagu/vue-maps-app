@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import type { Feature } from '@/interfaces';
+import { useUiStore } from '@/stores/ui.store';
 import { useMapStore } from '@/stores/map.store';
 import { usePlacesStore } from '@/stores/palces.store';
 import DirectionsIcon from '@/icons/DirectionsIcon.vue';
@@ -14,6 +15,7 @@ interface Props {
 defineProps<Props>();
 
 const activePlace = ref('');
+const uiStore = useUiStore();
 const mapStore = useMapStore();
 const { places, userLocation, isLoadingPlaces } = storeToRefs(usePlacesStore());
 
@@ -34,7 +36,11 @@ watch(places, (newPlaces) => {
 </script>
 
 <template>
-  <div v-show="true" class="mt-2 rounded-box max-h-80 overflow-y-scroll">
+  <div
+    v-show="uiStore.isResultsBoxVisible"
+    class="mt-2 rounded-box max-h-80 overflow-y-scroll"
+    aria-label="Results box"
+  >
     <div v-if="isLoadingPlaces" class="py-4 flex bg-base-200">
       <span
         class="loading loading-spinner loading-md text-primary mx-auto"
@@ -56,16 +62,17 @@ watch(places, (newPlaces) => {
     >
       <li v-for="place in places" :key="place.id" @click="selectPlaceHandler(place)">
         <div :class="['flex justify-between', { active: activePlace === place.id }]">
-          <div class="">
+          <div>
             <h3 class="w-32 truncate">{{ place.properties.name }}</h3>
             <p class="w-32 truncate">{{ place.properties.full_address }}</p>
           </div>
 
           <button
+            type="button"
             class="btn btn-sm btn-primary"
             @click.stop="getDirectionHandler(place.geometry.coordinates)"
           >
-            <directions-icon class="w-4 h-4" />
+            <directions-icon class="w-4 h-4" aria-hidden="true" />
             Directions
           </button>
         </div>
