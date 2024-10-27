@@ -45,7 +45,7 @@ const vClickOutside: Directive = {
     v-click-outside="uiStore.hideResultsBox"
     aria-label="Search Bar"
   >
-    <form action="">
+    <form @submit.prevent class="appearance-none">
       <label
         class="input input-bordered input-primary flex items-center gap-2"
         aria-label="Search Input"
