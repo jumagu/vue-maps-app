@@ -41,7 +41,7 @@ const vClickOutside: Directive = {
 
 <template>
   <section
-    class="fixed top-4 left-4 w-80"
+    class="fixed w-auto top-4 left-4 right-4 md:w-80 md:left-4 md:right-0"
     v-click-outside="uiStore.hideResultsBox"
     aria-label="Search Bar"
   >

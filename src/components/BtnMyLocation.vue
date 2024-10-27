@@ -16,11 +16,11 @@ const goToCurrentLocation = () => {
 <template>
   <button
     type="button"
-    class="btn btn-primary fixed top-4 right-4"
+    class="btn btn-primary fixed bottom-4 left-4 md:bottom-auto md:left-auto md:top-4 md:right-4"
     :disabled="!placesStore.userLocation || !mapStore.map"
     @click="goToCurrentLocation"
   >
-    <location-current-icon class="w-5 h-5" />
+    <location-current-icon class="w-5 h-5" aria-hidden="true" />
     My Location
   </button>
 </template>
