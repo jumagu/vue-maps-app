@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.mapboxgl-ctrl-bottom-right {
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left {
   display: none !important;
+}
+
+@media (min-width: 768px) {
+  .mapboxgl-ctrl-bottom-left {
+    display: block !important;
+  }
 }
